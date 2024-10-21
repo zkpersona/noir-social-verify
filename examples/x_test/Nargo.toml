@@ -1,0 +1,8 @@
+[package]
+name = "x_test"
+type = "bin"
+authors = ["cv"]
+compiler_version = ">=0.35.0"
+
+[dependencies]
+noir_social_verify = { path = "../../lib" }
