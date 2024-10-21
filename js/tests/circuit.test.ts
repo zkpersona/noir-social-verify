@@ -4,6 +4,7 @@ import { ZKEmailProver } from '../src/prover';
 import { generateEmailVerifierInputs } from '../src/index';
 
 import twitterVerify from '../../examples/x_test/target/x_test.json';
+import { getXUsername } from '../src/utils';
 
 const emails = {
 	x_valid: fs.readFileSync(path.join(__dirname, '../data/x-valid.eml')),
@@ -12,7 +13,7 @@ const emails = {
 
 // default header/ body lengths to use for input gen
 const inputParams = {
-	x_valid: { maxHeadersLength: 576, maxBodyLength: 16384 },
+	x_valid: { maxHeadersLength: 576, maxBodyLength: 16384, extractFrom: true },
 };
 
 describe('Social Verify Circuit Unit Tests', () => {
@@ -20,7 +21,7 @@ describe('Social Verify Circuit Unit Tests', () => {
 
 	beforeAll(() => {
 		//@ts-ignore
-		twitterProver = new ZKEmailProver(twitterVerify, 'all');
+		twitterProver = new ZKEmailProver(twitterVerify, 'honk');
 	});
 
 	afterAll(async () => {
@@ -34,19 +35,19 @@ describe('Social Verify Circuit Unit Tests', () => {
 				inputParams.x_valid
 			);
 
-			const inputs = {
-				header: i.header.storage,
-				header_length: i.header.len,
-				body_hash_index: i.body_hash_index!,
-				body: i.body?.storage!,
-				body_length: i.body?.len!,
-				pubkey: i.pubkey.modulus,
-				pubkey_redc: i.pubkey.redc,
+			let inputs = {
+				header: i.header,
+				pubkey: i.pubkey,
 				signature: i.signature,
+				dkim_header_sequence: i.dkim_header_sequence,
+				body: i.body!,
+				body_hash_index: i.body_hash_index!,
+				from_header_sequence: i.from_header_sequence!,
+				from_address_sequence: i.from_address_sequence!,
+				username: getXUsername('@dummy_testing_'),
 			};
 
-			const res = await twitterProver.simulateWitness(inputs);
-			expect(res.returnValue === true);
+			await twitterProver.simulateWitness(inputs);
 		});
 	});
 });

@@ -1,3 +1,5 @@
+import { Uint8ArrayToCharArray, sha256Pad } from '@zk-email/helpers';
+
 export type Sequence = {
 	index: string;
 	length: string;
@@ -138,6 +140,13 @@ export function makeEmailAddressCharTable(): string {
 	return tableStr;
 }
 
-// export function computeStandardOutputs(email: Buffer): Promise<[bigint, bigint]> {
+export const getXUsername = (username: string): BoundedVec => {
+	const [padded] = sha256Pad(Uint8Array.from(Buffer.from(username)), 64);
 
-// }
+	const vec: BoundedVec = {
+		storage: Uint8ArrayToCharArray(padded),
+		len: username.length.toString(),
+	};
+
+	return vec;
+};

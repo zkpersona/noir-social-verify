@@ -18,6 +18,6 @@
 		"incremental": true,
 		"outDir": "dist"
 	},
-	"include": ["src/**/*", "README.md", "LICENSE", "tests/**/*"],
+	"include": ["src/**/*", "README.md", "LICENSE", "tests/**/*", "**/*.{ts,tsx}"],
 	"exclude": ["dist", "node_modules"]
 }
