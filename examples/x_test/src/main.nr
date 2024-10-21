@@ -1,30 +1,31 @@
 use noir_social_verify::x::verify_x;
+use noir_social_verify::zkemail::{KEY_LIMBS_2048, dkim::RSAPubkey, Sequence};
 
-global EMAIL_HEADER_LENGTH: u32 = 576;
-global EMAIL_BODY_LENGTH: u32 = 16384;
+pub global MAX_EMAIL_HEADER_LENGTH: u32 = 576;
+pub global MAX_EMAIL_BODY_LENGTH: u32 = 16384;
+pub global MAX_USERNAME_LENGTH: u32 = 64; // Twitter username length limit including @
 
 fn main(
-    header: [u8; EMAIL_HEADER_LENGTH],
-    header_length: u32,
+    header: BoundedVec<u8, MAX_EMAIL_HEADER_LENGTH>,
+    body: BoundedVec<u8, MAX_EMAIL_BODY_LENGTH>,
+    pubkey: RSAPubkey<KEY_LIMBS_2048>,
+    signature: [Field; KEY_LIMBS_2048],
     body_hash_index: u32,
-    body: [u8; EMAIL_BODY_LENGTH],
-    body_length: u32,
-    pubkey: [Field; 18],
-    pubkey_redc: [Field; 18],
-    signature: [Field; 18]
-) -> pub bool {
-    let res: bool = verify_x(
+    dkim_header_sequence: Sequence,
+    from_header_sequence: Sequence,
+    from_address_sequence: Sequence,
+    username: BoundedVec<u8, MAX_USERNAME_LENGTH>
+) -> pub (BoundedVec<u8, 320>, BoundedVec<u8, MAX_USERNAME_LENGTH>) {
+    let res = verify_x(
         header,
-        header_length,
-        body_hash_index,
         body,
-        body_length,
         pubkey,
-        pubkey_redc,
-        signature
+        signature,
+        body_hash_index,
+        dkim_header_sequence,
+        from_header_sequence,
+        from_address_sequence,
+        username
     );
-
-    assert(res);
-
     res
 }
