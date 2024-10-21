@@ -1,32 +1,41 @@
-use dep::string_search::{StringBody, SubString, StringBody512, SubString32, SubString64, StringBody1024};
+use dep::string_search::{SubString, SubString128, StringBody16384, SubString64};
+use dep::string_search::StringBody;
 
-pub fn find_from_index<let M: u32, let N: u32>(
-    header: [u8; M],
-    padded_recipient_local: [u8; N],
-    recipient_local_length: u32
-) -> (bool, u32) {
-    let needle_text_init: [u8; 5] = "from:".as_bytes();
-    let needle_start: SubString32 = SubString::new(needle_text_init, needle_text_init.len());
-    let needle_end: SubString64 = SubString::new(padded_recipient_local, recipient_local_length);
-    let needle = needle_start.concat_into(needle_end);
-
-    // init the search domain
-    let haystack: StringBody1024 = StringBody::new(header, M);
-
-    // find the index of the position
-    haystack.substring_match(needle)
+pub trait BoundedVecExtentions {
+    fn is_eq<let M: u32>(self, array: [u8;M]) -> bool;
 }
 
-pub fn extract_expected_sender_domain<let M: u32, let N: u32>(
-    header: [u8; M],
-    recipient_local_length: u32,
-    index: u32
-) -> [u8; N] {
-    let mut recipient_domain = [0 as u8; N];
-    for i in 0..N {
-        // iterator + found index starting the to search + length of recipient local address + len(from:)
-        // should start at `@`
-        recipient_domain[i] = header[i + index + recipient_local_length + 5];
+impl BoundedVecExtentions for BoundedVec<u8,320> {
+    fn is_eq<let M: u32>(self, array: [u8; M]) -> bool {
+        if (self.len != M) {
+            false
+        }
+        for i in 0..M {
+            if {
+                self.get_unchecked(i) != array[i]
+            } {
+                false
+            }
+        }
+        true
     }
-    recipient_domain
+}
+
+pub fn find_x_username(
+    data: [u8; 16384],
+    data_length: u32,
+    padded_username: [u8; 64],
+    username_length: u32
+) -> (bool, u32) {
+    let needle_text_init = "If you requested a password reset for ".as_bytes();
+
+    let needle_start: SubString64 = SubString::new(needle_text_init, needle_text_init.len());
+    let needle_end: SubString128 = SubString::new(padded_username, username_length);
+    // use concat_into because SubString128 > SubString32
+    let needle = needle_start.concat_into(needle_end);
+
+    let haystack: StringBody16384 = StringBody::new(data, data_length);
+    let (result, match_position): (bool, u32) = haystack.substring_match(needle);
+
+    (result, match_position)
 }

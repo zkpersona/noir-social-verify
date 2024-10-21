@@ -1,34 +1,38 @@
-use dep::zkemail::{dkim::verify_dkim_2048, get_body_hash_by_index, base64::body_hash_base64_decode};
-use dep::std::hash::sha256_var;
-use crate::utils::find_from_index;
+use dep::zkemail::{KEY_LIMBS_2048, dkim::RSAPubkey, Sequence, headers::email_address::get_email_address};
 
-global EMAIL_HEADER_LENGTH: u32 = 576;
-global EMAIL_BODY_LENGTH: u32 = 16384;
+global MAX_EMAIL_HEADER_LENGTH: u32 = 576;
+global MAX_EMAIL_BODY_LENGTH: u32 = 16384;
 global FROM_EMAIL_LENGTH: u32 = 37;
-global FROM_EMAIL: [u8; FROM_EMAIL_LENGTH] = "Google <no-reply@accounts.google.com>".as_bytes(); // example of string search
+global FROM_EMAIL: [u8; FROM_EMAIL_LENGTH] = "Google <no-reply@accounts.google.com>".as_bytes();
 
-pub fn verify_x(
-    header: [u8; EMAIL_HEADER_LENGTH],
-    header_length: u32,
-    body_hash_index: u32,
-    body: [u8; EMAIL_BODY_LENGTH],
-    body_length: u32,
-    pubkey: [Field; 18],
-    pubkey_redc: [Field; 18],
-    signature: [Field; 18]
-) {
-    verify_dkim_2048(header, header_length, pubkey, pubkey_redc, signature);
+pub fn verify_google(
+    header: BoundedVec<u8, MAX_EMAIL_HEADER_LENGTH>,
+    body: BoundedVec<u8, MAX_EMAIL_BODY_LENGTH>,
+    pubkey: RSAPubkey<KEY_LIMBS_2048>,
+    signature: [Field; KEY_LIMBS_2048],
+    from_header_sequence: Sequence,
+    from_address_sequence: Sequence,
+    to_header_sequence: Sequence,
+    to_address_sequence: Sequence
+) -> BoundedVec<u8, 320> {
+    assert(header.len() <= MAX_EMAIL_HEADER_LENGTH);
+    assert(body.len() <= MAX_EMAIL_BODY_LENGTH);
 
-    let body_hash_encoded: [u8; 44] = get_body_hash_by_index(header, body_hash_index);
-    let signed_body_hash: [u8; 32] = body_hash_base64_decode(body_hash_encoded);
+    pubkey.verify_dkim_signature(header, signature);
 
-    let computed_body_hash: [u8; 32] = sha256_var(body, body_length as u64);
+    let from = comptime {
+        "from".as_bytes()
+    };
 
-    assert(
-        signed_body_hash == computed_body_hash, "SHA256 hash computed over body does not match body hash found in DKIM-signed header"
-    );
+    let from_address: BoundedVec<u8, 320> = get_email_address(header, from_header_sequence, from_address_sequence, from);
 
-    let (found, _) = find_from_index(header, FROM_EMAIL, FROM_EMAIL_LENGTH);
-    assert(found, "Email is not sent by Official Google Account Email");
-    // TODO: Verify OAuth Domain and Email from Email Body
+    assert(from_address.is_eq(FROM_EMAIL));
+
+    let to = comptime {
+        "to".as_bytes()
+    };
+
+    let to_address: BoundedVec<u8, 320> = get_email_address(header, to_header_sequence, to_address_sequence, to);
+
+    to_address
 }
