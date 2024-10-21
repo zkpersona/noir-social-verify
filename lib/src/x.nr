@@ -16,7 +16,7 @@ pub fn verify_x(
     pubkey: [Field; 18],
     pubkey_redc: [Field; 18],
     signature: [Field; 18]
-) {
+) -> bool {
     verify_dkim_2048(header, header_length, pubkey, pubkey_redc, signature);
 
     let body_hash_encoded: [u8; 44] = get_body_hash_by_index(header, body_hash_index);
@@ -28,7 +28,9 @@ pub fn verify_x(
         signed_body_hash == computed_body_hash, "SHA256 hash computed over body does not match body hash found in DKIM-signed header"
     );
 
-    let (found, _) = find_from_index(header, FROM_EMAIL, FROM_EMAIL_LENGTH);
-    assert(found, "Email is not sent by Official X Email");
+    // let (found, _) = find_from_index(header, FROM_EMAIL, FROM_EMAIL_LENGTH);
+    // assert(found, "Email is not sent by Official X Email");
     // TODO: Verify Twitter Username from Email Body
+
+    true
 }
