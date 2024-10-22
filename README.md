@@ -8,7 +8,7 @@ In your `Nargo.toml` file, add the version of this library you would like to ins
 
 ```toml
 [dependencies]
-noir_social_verify = { tag = "v1.0.0", git = "https://github.com/Envoy-VC/noir_social_verify" }
+noir_social_verify = { tag = "v0.0.1", git = "https://github.com/Envoy-VC/noir_social_verify" }
 ```
 
 ## Usage
