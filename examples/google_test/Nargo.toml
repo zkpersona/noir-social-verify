@@ -1,0 +1,8 @@
+[package]
+name = "google_test"
+type = "bin"
+authors = ["Vedant Chainani <vedantchainani1084@gmail.com>"]
+compiler_version = ">=0.35.0"
+
+[dependencies]
+noir_social_verify = { path = "../../lib" }
