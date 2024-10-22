@@ -120,7 +120,7 @@ fn main(
     from_address_sequence: Sequence,
     username: BoundedVec<u8, MAX_USERNAME_LENGTH>
 ) -> pub BoundedVec<u8, MAX_USERNAME_LENGTH> {
-    let username = verify_x(
+    let extracted_username = verify_x(
         header,
         body,
         pubkey,
@@ -131,7 +131,7 @@ fn main(
         from_address_sequence,
         username
     );
-    username
+    extracted_username
 }
 ```
 
