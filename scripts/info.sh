@@ -19,7 +19,7 @@ get_circuit_size() {
     popd > /dev/null
 }
 
-cd ../examples
+cd ./examples
 # Loop over every child folder in the examples directory
 for folder in *; do
     if [ -d "$folder" ]; then
