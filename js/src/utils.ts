@@ -150,3 +150,10 @@ export const getXUsername = (username: string): BoundedVec => {
 
 	return vec;
 };
+
+export const extractDataFromVec = (data: BoundedVec): string => {
+	const len = data.len;
+	const storage = data.storage.slice(0, parseInt(len));
+	const intArray = storage.map((x) => parseInt(x, 16));
+	return Buffer.from(intArray).toString('utf-8');
+};

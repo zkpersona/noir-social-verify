@@ -25,7 +25,7 @@ pub fn verify_x(
     from_header_sequence: Sequence,
     from_address_sequence: Sequence,
     username: BoundedVec<u8,MAX_USERNAME_LENGTH>
-) -> (BoundedVec<u8, 320>, BoundedVec<u8, MAX_USERNAME_LENGTH>) {
+) -> BoundedVec<u8, MAX_USERNAME_LENGTH> {
     assert(header.len() <= MAX_EMAIL_HEADER_LENGTH);
     assert(body.len() <= MAX_EMAIL_BODY_LENGTH);
 
@@ -49,5 +49,5 @@ pub fn verify_x(
 
     assert(found, "Social Verify Error: Cannot Find Username in Email Body");
 
-    (from_address, username)
+    username
 }

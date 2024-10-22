@@ -2,7 +2,6 @@ use noir_social_verify::google::verify_google;
 use noir_social_verify::zkemail::{KEY_LIMBS_2048, dkim::RSAPubkey, Sequence};
 
 pub global MAX_EMAIL_HEADER_LENGTH: u32 = 576;
-pub global MAX_EMAIL_BODY_LENGTH: u32 = 16384;
 
 fn main(
     header: BoundedVec<u8, MAX_EMAIL_HEADER_LENGTH>,

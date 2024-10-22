@@ -3,7 +3,7 @@ use noir_social_verify::zkemail::{KEY_LIMBS_2048, dkim::RSAPubkey, Sequence};
 
 pub global MAX_EMAIL_HEADER_LENGTH: u32 = 576;
 pub global MAX_EMAIL_BODY_LENGTH: u32 = 16384;
-pub global MAX_USERNAME_LENGTH: u32 = 64; // Twitter username length limit including @
+pub global MAX_USERNAME_LENGTH: u32 = 64;
 
 fn main(
     header: BoundedVec<u8, MAX_EMAIL_HEADER_LENGTH>,
@@ -15,7 +15,7 @@ fn main(
     from_header_sequence: Sequence,
     from_address_sequence: Sequence,
     username: BoundedVec<u8, MAX_USERNAME_LENGTH>
-) -> pub (BoundedVec<u8, 320>, BoundedVec<u8, MAX_USERNAME_LENGTH>) {
+) -> pub BoundedVec<u8, MAX_USERNAME_LENGTH> {
     let res = verify_x(
         header,
         body,

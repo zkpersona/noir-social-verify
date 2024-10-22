@@ -1,7 +1,6 @@
 use dep::zkemail::{KEY_LIMBS_2048, dkim::RSAPubkey, Sequence, headers::email_address::get_email_address};
 
 pub global MAX_EMAIL_HEADER_LENGTH: u32 = 576;
-pub global MAX_EMAIL_BODY_LENGTH: u32 = 16384;
 pub global FROM_EMAIL_LENGTH: u32 = 28;
 pub global FROM_EMAIL: [u8; FROM_EMAIL_LENGTH] = "no-reply@accounts.google.com".as_bytes(); // example of string search
 
