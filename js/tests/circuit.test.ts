@@ -6,11 +6,12 @@ import { generateEmailVerifierInputs, InputGenerationArgs } from '../src/index';
 import twitterVerify from '../../examples/x_test/target/x_test.json';
 import googleVerify from '../../examples/google_test/target/google_test.json';
 import linkedinVerify from '../../examples/linkedin_test/target/linkedin_test.json';
+import githubVerify from '../../examples/github_test/target/github_test.json';
+
 import { BoundedVec, getXUsername } from '../src/utils';
 import { CompiledCircuit } from '@noir-lang/backend_barretenberg';
 
 import { extractDataFromVec } from '../src/utils';
-import { InputMap } from '@noir-lang/noirc_abi';
 
 const emails = {
 	x_valid: fs.readFileSync(path.join(__dirname, '../data/x-valid.eml')),
@@ -19,6 +20,9 @@ const emails = {
 	),
 	linkedin_valid: fs.readFileSync(
 		path.join(__dirname, '../data/linkedin-valid.eml')
+	),
+	github_valid: fs.readFileSync(
+		path.join(__dirname, '../data/github-valid.eml')
 	),
 };
 ``;
@@ -38,24 +42,33 @@ const inputParams: Record<string, InputGenerationArgs> = {
 		extractFrom: true,
 		extractTo: true,
 	},
+	github_valid: {
+		maxHeadersLength: 576,
+		maxBodyLength: 49152,
+		extractFrom: true,
+		extractTo: true,
+	},
 };
 
 describe('Social Verify Circuit Unit Tests', () => {
 	let twitterProver: ZKEmailProver;
 	let googleProver: ZKEmailProver;
 	let linkedinProver: ZKEmailProver;
+	let githubProver: ZKEmailProver;
 
 	beforeAll(() => {
 		//@ts-ignore
 		twitterProver = new ZKEmailProver(twitterVerify, 'honk');
 		googleProver = new ZKEmailProver(googleVerify as CompiledCircuit, 'honk');
 		linkedinProver = new ZKEmailProver(linkedinVerify as CompiledCircuit, 'honk');
+		githubProver = new ZKEmailProver(githubVerify as CompiledCircuit, 'honk');
 	});
 
 	afterAll(async () => {
 		await twitterProver.destroy();
 		await googleProver.destroy();
 		await linkedinProver.destroy();
+		await githubProver.destroy();
 	});
 
 	describe('Successful Cases', () => {
@@ -122,6 +135,26 @@ describe('Social Verify Circuit Unit Tests', () => {
 			};
 
 			const res = await linkedinProver.simulateWitness(inputs);
+			const from = extractDataFromVec(res.returnValue as unknown as BoundedVec);
+			expect(from).toEqual('test.personal.acc@gmail.com');
+		});
+		it('Valid GitHub Email', async () => {
+			const i = await generateEmailVerifierInputs(
+				emails.github_valid,
+				inputParams.github_valid
+			);
+
+			let inputs = {
+				header: i.header,
+				pubkey: i.pubkey,
+				signature: i.signature,
+				from_header_sequence: i.from_header_sequence!,
+				from_address_sequence: i.from_address_sequence!,
+				to_header_sequence: i.to_header_sequence!,
+				to_address_sequence: i.to_address_sequence!,
+			};
+
+			const res = await githubProver.simulateWitness(inputs);
 			const from = extractDataFromVec(res.returnValue as unknown as BoundedVec);
 			expect(from).toEqual('test.personal.acc@gmail.com');
 		});

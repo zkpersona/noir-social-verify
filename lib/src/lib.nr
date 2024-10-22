@@ -4,6 +4,7 @@ pub mod utils;
 pub mod x;
 pub mod google;
 pub mod linkedin;
+pub mod github;
 
 // Re-exports
 pub use dep::zkemail;
