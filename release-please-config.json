@@ -3,6 +3,7 @@
 	"release-type": "simple",
 	"bump-minor-pre-major": true,
 	"bump-patch-for-minor-pre-major": true,
+	"prerelease": true,
 	"pull-request-title-pattern": "chore: release ${version}",
 	"group-pull-request-title-pattern": "chore: release ${version}",
 	"packages": {
