@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.2](https://github.com/Envoy-VC/noir_social_verify/compare/v0.0.1...v0.0.2) (2024-10-26)
+
+
+### Bug Fixes
+
+* Bounded vec implementation and add tests for bounded vector extensions ([0e02a4e](https://github.com/Envoy-VC/noir_social_verify/commit/0e02a4e56130e3237f69b4f3e83edda22383936c))
+
 ## 0.0.1 (2024-10-22)
 
 
