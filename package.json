@@ -1,0 +1,38 @@
+{
+  "name": "@zkpersona/noir-social-verify",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": {
+    "name": "Vedant Chainani",
+    "email": "vedant@zkpersona.com",
+    "url": "https://zkpersona.xyz"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": ["dist/**"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "vitest",
+    "test": "vitest run",
+    "format": "pnpm biome format",
+    "format:write": "pnpm biome format --write"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "^22",
+    "klarity": "^0.0.3",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "extends": ["klarity/biome"],
+  "overrides": [
+    {
+      // Needed for Config default export
+      "include": [
+        "**/*.d.ts",
+        "*.config.ts",
+        "*.config.js",
+        "*.config.mjs",
+        "*.config.cjs"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDefaultExport": "off"
+          }
+        }
+      }
+    }
+  ]
+}
