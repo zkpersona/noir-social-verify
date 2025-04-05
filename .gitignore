@@ -26,3 +26,6 @@ target
 
 # Noir Exports
 export
+
+# generated
+__generated__

@@ -1,3 +1,3 @@
 [workspace]
-members = ["circuits", "examples/google_example"]
+members = ["circuits", "examples/google_example", "examples/x_example"]
 default-member = "circuits"

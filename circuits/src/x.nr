@@ -58,7 +58,7 @@ pub fn verify_x_email(
     let from_address = get_email_address(header, from_header_sequence, from_address_sequence, from);
 
     // Verify that the 'from' address matches the expected Google email address
-    assert(from_address.eq(BoundedVec::from_array(X_FROM_EMAIL)), "Invalid from address");
+    assert(from_address.eq(BoundedVec::from(X_FROM_EMAIL)), "Invalid from address");
 
     // Extract the 'to' address from the email header
     let to_address = get_email_address(header, to_header_sequence, to_address_sequence, to);
@@ -67,5 +67,5 @@ pub fn verify_x_email(
     let email_nullifier = pedersen_hash(signature);
 
     // Return the verified outputs
-    VerifiedOutputs { pub_key_hash: pubkey.hash(), email_nullifier, to_address }
+    VerifiedOutputs::new(pubkey.hash(), email_nullifier, to_address)
 }
