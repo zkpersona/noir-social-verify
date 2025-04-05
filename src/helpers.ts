@@ -1,10 +1,9 @@
+import type { CompiledCircuit } from '@noir-lang/noir_js';
 import {
   type InputGenerationArgs,
   generateEmailVerifierInputs,
 } from '@zk-email/zkemail-nr';
 import { type ProvingBackend, ZKEmailProver } from '../src';
-
-import type { CompiledCircuit } from '@noir-lang/noir_js';
 import type { CircuitInputMap, CircuitType } from './types';
 
 export const circuitParams: Record<CircuitType, InputGenerationArgs> = {

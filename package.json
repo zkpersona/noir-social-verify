@@ -20,7 +20,8 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist/**"
+    "dist/**",
+    "circuits"
   ],
   "scripts": {
     "compile": "bash ./scripts/compile.sh",
@@ -37,6 +38,7 @@
     "@noir-lang/noir_codegen": "^1.0.0-beta.3",
     "@types/node": "^22",
     "dotenv": "^16.4.7",
+    "json2toml": "^6.1.1",
     "klarity": "^0.0.3",
     "tsup": "^8.3.5",
     "typescript": "^5.7.3",

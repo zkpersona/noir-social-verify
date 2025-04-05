@@ -24,7 +24,7 @@
     },
     {
       // Needed for Config default export
-      "include": ["src/helpers.ts", "src/types/index.ts"],
+      "include": ["src/helpers.ts", "src/types/index.ts", "tests/helpers.ts"],
       "linter": {
         "rules": {
           "style": {

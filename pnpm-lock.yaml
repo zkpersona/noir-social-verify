@@ -30,6 +30,9 @@ importers:
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
+      json2toml:
+        specifier: ^6.1.1
+        version: 6.1.1
       klarity:
         specifier: ^0.0.3
         version: 0.0.3
@@ -913,6 +916,10 @@ packages:
   js-sha3@0.8.0:
     resolution: {integrity: sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==}
 
+  json2toml@6.1.1:
+    resolution: {integrity: sha512-kv8qBrRbdK7TVUdQuMcyJxw6pmDCYS5WNco23kcZ9foh+Jp4Q/up65wCOizRMT5EoAhcAHD15jDI0dbKEglzEQ==}
+    engines: {node: 18 || >=20}
+
   jsonpath@1.1.1:
     resolution: {integrity: sha512-l6Cg7jRpixfbgoWgkrl77dgEj8RPvND0wMH6TwQmi9Qs4TFfS9u5cUFnbeKTwj5ga5Y3BTGGNI28k117LJ009w==}
 
@@ -951,6 +958,15 @@ packages:
 
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
+
+  lodash.isdate@4.0.1:
+    resolution: {integrity: sha512-hg5B1GD+R9egsBgMwmAhk+V53Us03TVvXT4dnyKugEfsD4QKuG9Wlyvxq8OGy2nu7qVGsh4DRSnMk33hoWBq/Q==}
+
+  lodash.isempty@4.4.0:
+    resolution: {integrity: sha512-oKMuF3xEeqDltrGMfDxAPGIVMSSRv8tbRSODbrs4KGsRRLEhrW8N8Rd4DRgB2+621hY8A8XwwrTVhXWpxFvMzg==}
+
+  lodash.isplainobject@4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
 
   lodash.sortby@4.7.0:
     resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
@@ -1159,6 +1175,10 @@ packages:
 
   std-env@3.9.0:
     resolution: {integrity: sha512-UGvjygr6F6tpH7o2qyqR6QYpwraIjKSdtzyBdyytFOHmPZY917kwdwLG0RbOjWOnKmnm3PeHjaoLLMie7kPLQw==}
+
+  strftime@0.10.3:
+    resolution: {integrity: sha512-DZrDUeIF73eKJ4/GgGuv8UHWcUQPYDYfDeQFj3jrx+JZl6GQE656MbHIpvbo4mEG9a5DgS8GRCc5DxJXD2udDQ==}
+    engines: {node: '>=0.2.0'}
 
   string-format@2.0.0:
     resolution: {integrity: sha512-bbEs3scLeYNXLecRRuk6uJxdXUSj6le/8rNPHChIJTn2V79aXVTR1EH2OH5zLKKoz0V02fOUKZZcw01pLUShZA==}
@@ -2410,6 +2430,13 @@ snapshots:
 
   js-sha3@0.8.0: {}
 
+  json2toml@6.1.1:
+    dependencies:
+      lodash.isdate: 4.0.1
+      lodash.isempty: 4.4.0
+      lodash.isplainobject: 4.0.6
+      strftime: 0.10.3
+
   jsonpath@1.1.1:
     dependencies:
       esprima: 1.2.2
@@ -2449,6 +2476,12 @@ snapshots:
       lie: 3.1.1
 
   lodash.camelcase@4.3.0: {}
+
+  lodash.isdate@4.0.1: {}
+
+  lodash.isempty@4.4.0: {}
+
+  lodash.isplainobject@4.0.6: {}
 
   lodash.sortby@4.7.0: {}
 
@@ -2641,6 +2674,8 @@ snapshots:
       escodegen: 1.14.3
 
   std-env@3.9.0: {}
+
+  strftime@0.10.3: {}
 
   string-format@2.0.0: {}
 
