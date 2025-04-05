@@ -19,3 +19,10 @@ lerna-debug.log*
 .env
 .env.*
 !.env.example
+
+
+# Noir Targets
+target
+
+# Noir Exports
+export

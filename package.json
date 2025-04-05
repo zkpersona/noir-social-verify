@@ -21,6 +21,8 @@
   "types": "./dist/index.d.ts",
   "files": ["dist/**"],
   "scripts": {
+    "compile": "bash ./scripts/compile.sh",
+    "generate-types": "bash ./scripts/generate-types.sh",
     "build": "tsup",
     "dev": "vitest",
     "test": "vitest run",
@@ -29,10 +31,14 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@noir-lang/noir_codegen": "1.0.0-beta.3",
     "@types/node": "^22",
     "klarity": "^0.0.3",
     "tsup": "^8.3.5",
     "typescript": "^5.7.3",
     "vitest": "^3.0.4"
+  },
+  "dependencies": {
+    "@noir-lang/noir_js": "1.0.0-beta.3"
   }
 }

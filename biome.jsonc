@@ -18,6 +18,18 @@
           }
         }
       }
+    },
+    {
+      // Needed for Config default export
+      "include": ["src/__generated__/*.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDefaultExport": "off",
+            "useNamingConvention": "off"
+          }
+        }
+      }
     }
   ]
 }

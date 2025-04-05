@@ -19,6 +19,7 @@ use super::{constants::GOOGLE_FROM_EMAIL, utils::VerifiedOutputs};
 /// # Returns
 ///
 /// * `VerifiedOutputs` - A struct containing the public key hash, email nullifier, and the 'to' address.
+#[export]
 pub fn verify_google_email(
     header: BoundedVec<u8, MAX_EMAIL_HEADER_LENGTH>,
     pubkey: RSAPubkey<KEY_LIMBS_2048>,
