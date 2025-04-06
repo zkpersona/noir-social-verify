@@ -30,10 +30,7 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist/**",
-    "circuits"
-  ],
+  "files": ["dist/**", "circuits/**"],
   "scripts": {
     "compile": "bash ./scripts/compile.sh",
     "prepare-env": "pnpm compile && pnpm generate-types",
@@ -42,7 +39,10 @@
     "dev": "vitest",
     "test": "vitest run",
     "format": "pnpm biome format",
-    "format:write": "pnpm biome format --write"
+    "format:write": "pnpm biome format --write",
+    "release": "pnpm run build && changeset publish",
+    "version-packages": "changeset version",
+    "changeset": "changeset"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
