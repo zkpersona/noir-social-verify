@@ -1,8 +1,19 @@
 {
   "name": "@zkpersona/noir-social-verify",
-  "version": "0.1.0",
-  "description": "",
-  "keywords": [],
+  "version": "0.0.2",
+  "description": "A library that provides a simple way to verify ownership of social accounts by proving e-mails.",
+  "keywords": [
+    "noir",
+    "noir-lang",
+    "library",
+    "noir-social-verify",
+    "zkpersona",
+    "noir-social-verification",
+    "social-verification",
+    "zero-knowledge",
+    "zero-knowledge-proofs",
+    "zk-email"
+  ],
   "license": "MIT",
   "author": {
     "name": "Vedant Chainani",
