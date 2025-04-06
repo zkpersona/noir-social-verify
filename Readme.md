@@ -11,7 +11,7 @@ In your `Nargo.toml` file, add the version of this library you would like to ins
 
 ```toml
 [dependencies]
-noir_social_verify = { tag = "v0.0.3", git = "https://github.com/zkpersona/noir_social_verify", directory = "circuits" }
+noir_social_verify = { tag = "v0.0.4", git = "https://github.com/zkpersona/noir_social_verify", directory = "circuits" }
 ```
 
 ## Usage
