@@ -1,6 +1,6 @@
 {
   "name": "@zkpersona/noir-social-verify",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A library that provides a simple way to verify ownership of social accounts by proving e-mails.",
   "keywords": [
     "noir",
@@ -30,7 +30,10 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": ["dist/**", "circuits"],
+  "files": [
+    "dist/**",
+    "circuits"
+  ],
   "scripts": {
     "compile": "bash ./scripts/compile.sh",
     "prepare-env": "pnpm compile && pnpm generate-types",
