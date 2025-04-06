@@ -48,13 +48,13 @@ export type VerifyXEmailInputs = {
 export type VerifyXEmailOutput = VerifiedOutputs;
 
 export type CircuitInputMap = {
-  google_example: VerifyGoogleEmailInputs;
-  x_example: VerifyXEmailInputs;
+  google: VerifyGoogleEmailInputs;
+  x: VerifyXEmailInputs;
 };
 
 export type CircuitOutputMap = {
-  google_example: VerifyGoogleEmailOutput;
-  x_example: VerifyXEmailOutput;
+  google: VerifyGoogleEmailOutput;
+  x: VerifyXEmailOutput;
 };
 
-export type CircuitType = 'google_example' | 'x_example';
+export type CircuitType = 'google' | 'x';

@@ -31,10 +31,7 @@ describe('Google Email Verification', () => {
       const emailContent = readFileSync(
         path.join(__dirname, '../data/google-valid.eml')
       );
-      const inputs = await generateCircuitInputs(
-        emailContent,
-        'google_example'
-      );
+      const inputs = await generateCircuitInputs(emailContent, 'google');
 
       const proof = await prover.fullProve(inputs, { type: 'honk' });
       const isVerified = await prover.verify(proof, { type: 'honk' });
@@ -49,10 +46,7 @@ describe('Google Email Verification', () => {
       const emailContent = readFileSync(
         path.join(__dirname, '../data/google-valid.eml')
       );
-      const inputs = await generateCircuitInputs(
-        emailContent,
-        'google_example'
-      );
+      const inputs = await generateCircuitInputs(emailContent, 'google');
 
       const proof = await prover.fullProve(inputs, { type: 'plonk' });
       const isVerified = await prover.verify(proof, { type: 'plonk' });

@@ -7,7 +7,7 @@ export const exportCircuitInputs = <T extends CircuitType>(
   circuitType: T,
   inputs: CircuitInputMap[T]
 ) => {
-  if (circuitType === 'google_example' || circuitType === 'x_example') {
+  if (circuitType === 'google' || circuitType === 'x') {
     const json = {
       header: inputs.header,
       pubkey: inputs.pubkey,
@@ -20,7 +20,7 @@ export const exportCircuitInputs = <T extends CircuitType>(
 
     const toml = json2toml(json, { indent: 0, newlineAfterSection: true });
     writeFileSync(
-      join(__dirname, `../examples/${circuitType}/Prover.toml`),
+      join(__dirname, `../examples/${circuitType}_example/Prover.toml`),
       toml
     );
   }

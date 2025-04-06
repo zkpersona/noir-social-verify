@@ -7,13 +7,13 @@ import { type ProvingBackend, ZKEmailProver } from '../src';
 import type { CircuitInputMap, CircuitType } from './types';
 
 export const circuitParams: Record<CircuitType, InputGenerationArgs> = {
-  google_example: {
+  google: {
     maxHeadersLength: 576,
     maxBodyLength: 16384,
     extractFrom: true,
     extractTo: true,
   },
-  x_example: {
+  x: {
     maxHeadersLength: 576,
     maxBodyLength: 16384,
     extractFrom: true,

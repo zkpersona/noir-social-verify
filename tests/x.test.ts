@@ -31,7 +31,7 @@ describe('X (Twitter) Email Verification', () => {
       const emailContent = readFileSync(
         path.join(__dirname, '../data/x-valid.eml')
       );
-      const inputs = await generateCircuitInputs(emailContent, 'x_example');
+      const inputs = await generateCircuitInputs(emailContent, 'x');
 
       const proof = await prover.fullProve(inputs, { type: 'honk' });
       const isVerified = await prover.verify(proof, { type: 'honk' });
@@ -46,7 +46,7 @@ describe('X (Twitter) Email Verification', () => {
       const emailContent = readFileSync(
         path.join(__dirname, '../data/x-valid.eml')
       );
-      const inputs = await generateCircuitInputs(emailContent, 'x_example');
+      const inputs = await generateCircuitInputs(emailContent, 'x');
 
       const proof = await prover.fullProve(inputs, { type: 'plonk' });
       const isVerified = await prover.verify(proof, { type: 'plonk' });
