@@ -19,10 +19,7 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist/**",
-    "circuits"
-  ],
+  "files": ["dist/**", "circuits"],
   "scripts": {
     "compile": "bash ./scripts/compile.sh",
     "prepare-env": "pnpm compile && pnpm generate-types",
@@ -35,6 +32,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@changesets/cli": "^2.28.1",
     "@noir-lang/noir_codegen": "^1.0.0-beta.3",
     "@types/node": "^22",
     "dotenv": "^16.4.7",
