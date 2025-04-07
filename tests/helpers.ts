@@ -1,6 +1,4 @@
-import { writeFileSync } from 'node:fs';
-import { join } from 'node:path';
-import json2toml from 'json2toml';
+import { generateToml } from '@zkpersona/noir-helpers';
 import type { CircuitInputMap, CircuitType } from '../src/types';
 
 export const exportCircuitInputs = <T extends CircuitType>(
@@ -18,10 +16,9 @@ export const exportCircuitInputs = <T extends CircuitType>(
       to_address_sequence: inputs.to_address_sequence,
     };
 
-    const toml = json2toml(json, { indent: 0, newlineAfterSection: true });
-    writeFileSync(
-      join(__dirname, `../examples/${circuitType}_example/Prover.toml`),
-      toml
-    );
+    generateToml(json, `../examples/${circuitType}_example/Prover.toml`, {
+      indent: 0,
+      newlineAfterSection: true,
+    });
   }
 };

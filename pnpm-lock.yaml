@@ -17,6 +17,9 @@ importers:
       '@zk-email/zkemail-nr':
         specifier: ^1.3.1
         version: 1.3.1
+      '@zkpersona/noir-helpers':
+        specifier: ^0.1.0
+        version: 0.1.0
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
@@ -638,6 +641,9 @@ packages:
 
   '@zk-email/zkemail-nr@1.3.1':
     resolution: {integrity: sha512-9hFr0KhvGL1Kpmjvdf+5z3KLlvQ2Z2YS0TejeTEvOKyYMB1xyO+q5mDOB2oU6mZVHwiZWRfcoSLlthAc1yPXbQ==}
+
+  '@zkpersona/noir-helpers@0.1.0':
+    resolution: {integrity: sha512-qa6awhTHzbXSqZ4RlvPtW74F9K5H8hFU2cfGVhvBjD5j9JJ0+ZusayedbPN7ZAKevgjI/W7o4DF8BK60iMmc6g==}
 
   addressparser@1.0.1:
     resolution: {integrity: sha512-aQX7AISOMM7HFE0iZ3+YnD07oIeJqWGVnJ+ZIKaBZAk03ftmVYVqsGas/rbXKR21n4D/hKCSHypvcyOkds/xzg==}
@@ -2544,6 +2550,14 @@ snapshots:
       - bufferutil
       - supports-color
       - utf-8-validate
+
+  '@zkpersona/noir-helpers@0.1.0':
+    dependencies:
+      '@aztec/bb.js': 0.84.0
+      '@noir-lang/noir_js': 1.0.0-beta.3
+      json2toml: 6.1.1
+    transitivePeerDependencies:
+      - supports-color
 
   addressparser@1.0.1: {}
 

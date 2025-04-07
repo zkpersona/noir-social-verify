@@ -29,3 +29,6 @@ export
 
 # generated
 __generated__
+
+# Benchmarks
+gates_report.json

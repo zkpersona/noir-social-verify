@@ -4,11 +4,9 @@ import { readFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-import {
-  type ZKEmailProver,
-  createProver,
-  generateCircuitInputs,
-} from '../src';
+import { createProver, generateCircuitInputs } from '../src';
+
+import type { Prover } from '@zkpersona/noir-helpers';
 
 import circuit from '../target/x_example.json' assert { type: 'json' };
 
@@ -16,7 +14,7 @@ import type { CompiledCircuit } from '@noir-lang/noir_js';
 import { skipHonkProving, skipPlonkProving } from './constants';
 
 describe('X (Twitter) Email Verification', () => {
-  let prover: ZKEmailProver;
+  let prover: Prover;
 
   beforeAll(() => {
     const threads = os.cpus().length;

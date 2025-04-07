@@ -11,7 +11,7 @@ In your `Nargo.toml` file, add the version of this library you would like to ins
 
 ```toml
 [dependencies]
-noir_social_verify = { tag = "v0.0.4", git = "https://github.com/zkpersona/noir_social_verify", directory = "circuits" }
+noir_social_verify = { tag = "v0.0.4", git = "https://github.com/zkpersona/noir-social-verify", directory = "lib" }
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ bun add @zkpersona/noir-social-verify
 Generating Inputs:
 
 ```ts
-import { generateCircuitInputs } from '@zk-email/zkemail-nr';
+import { generateCircuitInputs } from '@zkpersona/noir-social-verify';
 
 const inputs = await generateCircuitInputs(emailContent, 'google');
 ```
@@ -112,6 +112,12 @@ To get started with the project, clone the repository and install the dependenci
 
 ```bash
 git clone https://github.com/zkpersona/noir_social_verify.git
+```
+
+Install the dependencies by running the following command:
+
+```bash
+pnpm install
 ```
 
 Compile all the circuits by running the following command:

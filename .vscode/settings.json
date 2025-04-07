@@ -29,6 +29,5 @@
   },
   "[noir]": {
     "editor.defaultFormatter": "noir-lang.vscode-noir"
-  },
-  "noir.nargoPath": "/Users/envoy1084/.nargo/bin/nargo"
+  }
 }

@@ -3,7 +3,7 @@ import {
   type InputGenerationArgs,
   generateEmailVerifierInputs,
 } from '@zk-email/zkemail-nr';
-import { type ProvingBackend, ZKEmailProver } from '../src';
+import { type ProvingBackend, Prover } from '@zkpersona/noir-helpers';
 import type { CircuitInputMap, CircuitType } from './types';
 
 export const circuitParams: Record<CircuitType, InputGenerationArgs> = {
@@ -25,7 +25,7 @@ export const createProver = (
   circuit: CompiledCircuit,
   backend: ProvingBackend
 ) => {
-  const prover = new ZKEmailProver(circuit, backend);
+  const prover = new Prover(circuit, backend);
   return prover;
 };
 
