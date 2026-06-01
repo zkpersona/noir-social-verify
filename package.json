@@ -57,7 +57,7 @@
     "klarity": "^0.0.3",
     "tsup": "^8.3.5",
     "typescript": "^5.7.3",
-    "vitest": "^3.0.4",
+    "vitest": "^4.1.0",
     "zlib": "^1.0.5"
   },
   "dependencies": {
